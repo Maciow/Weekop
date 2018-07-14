@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: M
@@ -27,7 +28,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#">Główna</a></li>
                 <li><a href="#">Dodaj</a></li>
-                <li><a href="#">Zaloguj się</a></li>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user}">
+                        <li><a href="logout">Wyloguj się</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="login">Zaloguj się</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
 
@@ -36,7 +44,7 @@
 
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
-        <form class="form-signin" method="post" action="new">
+        <form class="form-signin" method="post" action="add">
             <h2 class="form-signin-heading">Dodaj nowe znalezisko</h2>
             <input name="inputName" type="text" class="form-control" placeholder="Co dodajesz?"
                    required autofocus />

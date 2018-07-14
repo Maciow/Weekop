@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: M
@@ -28,7 +29,14 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="#">Główna</a></li>
             <li><a href="#">Dodaj</a></li>
-            <li><a href="#">Zaloguj</a></li>
+              <c:choose>
+                  <c:when test="${not empty sessionScope.user}">
+                      <li><a href="logout">Wyloguj się</a></li>
+                  </c:when>
+                  <c:otherwise>
+                      <li><a href="login">Zaloguj się</a></li>
+                  </c:otherwise>
+              </c:choose>
           </ul>
         </div>
       </div>
@@ -95,7 +103,7 @@
 
     <footer class="footer">
       <div class="container">
-        <p class="navbar-text">Weekop - developed by <a href="javastart.pl">JavaStart.pl</a></p>
+        <p class="navbar-text">Weekop - developed by <a href="http://javastart.pl">JavaStart.pl</a></p>
       </div>
     </footer>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
